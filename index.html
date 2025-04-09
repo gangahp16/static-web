@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visionary Leaders & Their Societal Impact</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --danger: #e74c3c;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link i {
+            font-size: 1.2rem;
+        }
+
+        .nav-link:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Impact Meter */
+        .impact-meter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .impact-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .impact-fill {
+            height: 100%;
+            background: var(--success);
+            width: 70%;
+            transition: width 0.5s ease;
+        }
+
+        /* Enhanced Card Design */
+        .card {
+            position: relative;
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .impact-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .impact-tag i {
+            color: var(--success);
+        }
+
+        /* Timeline Visualization */
+        .timeline {
+            border-left: 3px solid var(--secondary);
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 1rem;
+            width: 15px;
+            height: 15px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h2 style="color: var(--primary);">ImpactVisionaries</h2>
+            <div class="nav-links">
+                <a class="nav-link" onclick="showSection('it')"><i class="fas fa-laptop-code"></i>Tech Leaders</a>
+                <a class="nav-link" onclick="showSection('auto')"><i class="fas fa-car"></i>Auto Innovators</a>
+                <a class="nav-link" onclick="showImpactStats()"><i class="fas fa-chart-line"></i>Global Impact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Add this new section for impact visualization -->
+    <section class="section" id="impact-section" style="display: none;">
+        <h2>Societal Impact Analysis</h2>
+        <div class="impact-meter">
+            <span>Positive Impact Index</span>
+            <div class="impact-bar">
+                <div class="impact-fill" id="global-impact"></div>
+            </div>
+            <span>82%</span>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Environmental Impact</h4>
+                <p>Reduction in carbon footprint through innovations</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Employment Generation</h4>
+                <p>Created over 10 million jobs globally</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Technological Advancements</h4>
+                <p>Pioneered 150+ breakthrough technologies</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Previous sections remain with added impact elements -->
+    <section class="section it-section">
+        <h2>Tech Visionaries <i class="fas fa-globe"></i></h2>
+        <div class="card-container" id="it-cards"></div>
+    </section>
+
+    <!-- Add impact tags to cards in JS -->
+    <script>
+        // Updated entrepreneur data with impact info
+        const entrepreneurs = [
+            {
+                name: "Elon Musk",
+                industry: "auto",
+                image: "images/person3.jpg",
+                netWorth: "216B",
+                impact: {
+                    environment: 8,
+                    employment: 9,
+                    innovation: 10
+                },
+                achievements: "Revolutionized sustainable transportation",
+                details: "Tesla's impact on EV adoption prevented 5M+ tons of CO2 emissions"
+            },
+            {
+                name: "Bill Gates",
+                industry: "it",
+                image: "images/person2.jpg",
+                netWorth: "129B",
+                impact: {
+                    environment: 7,
+                    employment: 8,
+                    innovation: 9
+                },
+                achievements: "Global health initiatives through Gates Foundation",
+                details: "Vaccine development funding saved 10M+ lives worldwide"
+            },
+            // Add more entries...
+        ];
+
+        function generateCards() {
+            // Previous card generation code
+            // Add impact tags to card HTML:
+            card.innerHTML = `
+                <div class="impact-tag">
+                    <i class="fas fa-seedling"></i>
+                    ${calculateImpactScore(person.impact)}/10
+                </div>
+                <!-- Rest of card content -->
+            `;
+        }
+
+        function calculateImpactScore(impact) {
+            return Math.round(
+                (impact.environment + impact.employment + impact.innovation) / 3
+            );
+        }
+
+        function showImpactStats() {
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.style.display = 'none';
+            });
+            document.getElementById('impact-section').style.display = 'block';
+            
+            // Animate impact meter
+            document.getElementById('global-impact').style.width = '82%';
+        }
+
+        // Add interactive hover effects
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseover', () => {
+                card.querySelector('.impact-tag').style.transform = 'scale(1.1)';
+            });
+            card.addEventListener('mouseout', () => {
+                card.querySelector('.impact-tag').style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
